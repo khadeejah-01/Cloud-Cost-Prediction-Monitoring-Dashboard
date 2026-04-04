@@ -1,0 +1,7 @@
+Explain step-by-step how system works:
+1. Upload CSV
+2. Java processes data
+3. Calls Flask API
+4. ML predicts cost
+5. JSON generated
+6. Dashboard displays charts
