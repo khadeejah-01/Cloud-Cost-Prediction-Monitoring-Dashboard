@@ -1,0 +1,171 @@
+#  System Architecture – Cloud Cost Monitoring & Prediction Dashboard
+
+##  Overview
+
+This project follows a **modular, multi-layered architecture** that separates responsibilities across different components:
+
+* **Frontend Layer** → Visualization & user interaction
+* **Java Application Layer** → Core processing & API integration
+* **Machine Learning Layer (Flask)** → Cost prediction
+* **Data Layer** → Dataset storage & preprocessing
+
+This design ensures **scalability, maintainability, and real-world relevance**.
+
+---
+
+##  High-Level Architecture
+
+```text
+        ┌────────────────────────────┐
+        │        Frontend UI         │
+        │   (HTML, CSS, JS Charts)   │
+        └────────────┬──────────────┘
+                     │
+                     ▼
+        ┌────────────────────────────┐
+        │      Java Application      │
+        │ (Processing + API Client)  │
+        └────────────┬──────────────┘
+                     │ HTTP (POST)
+                     ▼
+        ┌────────────────────────────┐
+        │        Flask API (ML)      │
+        │      /predict endpoint     │
+        └────────────┬──────────────┘
+                     │
+                     ▼
+        ┌────────────────────────────┐
+        │    Machine Learning Model  │
+        │    (Trained on dataset)    │
+        └────────────────────────────┘
+```
+
+---
+
+##  Data Flow (Step-by-Step)
+
+1. **User Interaction**
+   * User opens the dashboard (`index.html`).
+   * Data visualizations are displayed using JavaScript charts.
+
+2. **Data Processing (Java Layer)**
+   * Java reads the dataset (CSV/JSON).
+   * Processes cloud usage metrics:
+     * CPU
+     * Memory
+     * Network
+
+3. **Prediction Request**
+   * Java sends an HTTP POST request to the Flask API:
+
+   ```json
+   {
+     "cpu": 2,
+     "memory": 4,
+     "network": 100
+   }
+   ```
+
+4. **ML Model Execution (Flask)**
+   * Flask receives the request at `/predict`.
+   * Extracts input features.
+   * Passes data to the trained ML model (`model.pkl`).
+
+5. **Prediction Response**
+   * Model returns the predicted cost.
+   * Flask sends a JSON response back to Java:
+
+   ```json
+   {
+     "predicted_cost": 1.82
+   }
+   ```
+
+6. **Visualization**
+   * Java stores or forwards the prediction.
+   * Frontend displays the results in charts.
+
+---
+
+##  Component Breakdown
+
+### 1. Frontend Layer
+* **Technologies:** HTML, CSS, JavaScript
+* **Responsibilities:**
+  * Display cloud usage data
+  * Show predicted costs via charts
+  * Provide filtering (if implemented)
+
+### 2. Java Application Layer
+* **Technologies:** Core Java
+* **Key Modules:**
+  * `MainApp.java` → Entry point
+  * `UsageService.java` → Data processing
+  * `PredictionService.java` → ML API integration
+  * `ApiClient.java` → Handles HTTP requests
+* **Responsibilities:**
+  * Read and process the dataset
+  * Communicate with the Flask API
+  * Manage application logic
+
+### 3. Machine Learning Layer (Flask API)
+* **Technologies:** Python, Flask, Scikit-learn
+* **Responsibilities:**
+  * Load the trained ML model (`model.pkl`)
+  * Expose REST endpoint `/predict`
+  * Perform cost prediction based on inputs
+
+### 4. Data Layer
+* **Formats:** CSV, JSON
+* **Types:**
+  * Raw dataset (cloud usage)
+  * Processed dataset (cleaned)
+  * Prediction outputs
+
+---
+
+##  Design Decisions
+
+###  Separation of Concerns
+Each layer handles a specific responsibility:
+* **UI** → Visualization
+* **Java** → Core Logic
+* **Flask** → Machine Learning
+
+###  Language Interoperability
+* Java and Python communicate via a **REST API**.
+* This enables combining **strong backend logic with advanced ML capabilities**.
+
+###  Modular Design
+* Each component can be upgraded independently.
+* *Example:* The Flask ML service can be retrained or replaced without changing the frontend or Java backend.
+
+---
+
+##  Future Enhancement (Spring Boot Upgrade)
+
+In the next phase, the Java application will be upgraded to **Spring Boot**.
+
+**Planned Improvements:**
+* Convert the Core Java app into a RESTful backend.
+* Integrate the frontend into `resources/static`.
+* Add a database layer (MySQL/Firebase).
+* Implement real-time APIs.
+
+**Updated Architecture:**
+```text
+Frontend → Spring Boot Backend → Flask ML API → Model
+```
+
+---
+
+##  FAQ
+
+**Q: Why use Flask instead of Java for Machine Learning?**
+> **A:** Python provides superior support and an extensive ecosystem for machine learning libraries like Scikit-learn, TensorFlow, and PyTorch. Flask is used as a lightweight wrapper to expose the ML model as a microservice API, while Java continues to handle the heavy lifting of the core application logic.
+
+---
+
+##  Conclusion
+
+This architecture demonstrates a **hybrid system combining Java, web technologies, and machine learning**, making it highly suitable for real-world enterprise applications like **cloud cost optimization and monitoring systems**.
