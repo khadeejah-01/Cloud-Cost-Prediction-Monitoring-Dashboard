@@ -1,0 +1,7 @@
+## Future Improvements
+
+- Convert to Spring Boot backend
+- Use real cloud APIs (AWS, Azure)
+- Add real-time streaming data
+- Improve UI using React
+- Add authentication system
