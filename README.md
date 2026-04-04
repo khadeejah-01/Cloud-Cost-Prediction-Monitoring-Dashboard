@@ -140,8 +140,24 @@ http://127.0.0.1:5000
 
 ##  Learning Outcomes
 
-I learned how to integrate Java with a machine learning model using Flask API, handle and process real datasets, and structure a project in a modular way. I also understood how backend data flows to the frontend for visualization and why proper documentation and clean architecture are important in real-world software development.
+What I Learned from This Project:
 
+Working on this project actually helped me understand how real systems are built, not just small programs we usually make in class.
+
+First, I learned how different technologies can work together. Before this, I only used Java on its own, but here I connected Java with a Python Flask API for machine learning. It made me realize how systems in real life are not built in one language — they communicate through **APIs**.
+
+I also got hands-on experience with **handling data**. Reading CSV files, processing them, grouping data (daily, weekly costs), and converting everything into JSON for the dashboard really improved my understanding of **data flow** inside an application.
+
+Another important thing I learned was how machine learning can be **integrated** into software. Instead of just training a model, I actually used it in a working system where Java sends data and receives predictions. That made the ML part feel practical rather than theoretical.
+
+I also understood the importance of **structuring** a project properly. At the start, everything was in one place, but later I realized why separating logic (like prediction service, data processing, etc.) makes the system cleaner and easier to manage. This is something that is strongly emphasized in software development practices as well .
+
+Working on the dashboard part helped me see how backend data is finally presented to users. Generating JSON and visualizing it with charts made the project feel complete and closer to a real product.
+
+Another thing I learned was the importance of **documentation** and organization. Writing README, creating a proper folder structure, and adding docs made me realize that code alone is not enough — a project should be understandable to others too. Good documentation actually helps in collaboration and makes systems easier to use and maintain .
+
+Overall, this project improved my problem-solving skills a lot. I faced issues with API calls, data flow, and integration, but solving them step by step gave me confidence that I can handle more complex systems in the future.
+where should i add this.. or should i even do it, or make it more compact
 ---
 
 ##  License
